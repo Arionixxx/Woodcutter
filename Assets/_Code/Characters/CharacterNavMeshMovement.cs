@@ -1,7 +1,5 @@
 using Data;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UpdateSys;
@@ -13,7 +11,13 @@ namespace Characters
         [SerializeField]
         private NavMeshAgent _agent;
 
-        private readonly float _reachPointOffset = 0.1f;
+        [SerializeField]
+        private CharacterAnimation _characterAnimation;
+
+        private readonly float _reachPointOffset = 0.01f;
+
+        private float _maxMoveSpeed = 4f;
+        private float _rotationSpeed = 10f;
 
         private Vector3 _targetPosition;
 
@@ -21,8 +25,15 @@ namespace Characters
 
         private Action _onReachPointAction;
 
+        private void Start()
+        {
+            InitializeSpeedAndRotation();
+        }
+
+
         public void OnSystemUpdate(float deltaTime)
         {
+            NavmeshMovementUpdate();
             CheckIsPointReached();
         }
 
@@ -30,13 +41,16 @@ namespace Characters
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                StartMovement(new Vector3(10, 0, 10), new NavmeshMovementData());
+                StartMovement(new Vector3(10, 0, 10), new NavmeshMovementData(() =>
+                { Debug.Log("o!");}
+                ));
             }
         }
 
         public void StartMovement(Vector3 position, NavmeshMovementData movementData)
         {
             _targetPosition = position;
+            _agent.enabled = true;
             _agent.destination = _targetPosition;
             SetupMovementData(movementData);
             this.StartUpdate();
@@ -44,6 +58,8 @@ namespace Characters
 
         private void StopMovement()
         {
+            _agent.enabled = false;
+            _characterAnimation.ChangeMovingSpeed(0, _maxMoveSpeed);
             AlignCharacterByRotationAfterStop();
         }
 
@@ -81,10 +97,23 @@ namespace Characters
             transform.rotation = Quaternion.Euler(0, euler.y, 0);
         }
 
+        private void NavmeshMovementUpdate()
+        {
+            _characterAnimation.ChangeMovingSpeed(_agent.velocity.sqrMagnitude / _maxMoveSpeed, _maxMoveSpeed);
+        }
+
+        private void InitializeSpeedAndRotation()
+        {
+            _agent.speed = _maxMoveSpeed;//_moveSpeed = _settings.NavmeshMoveSpeed;
+            _agent.angularSpeed = _rotationSpeed;
+        }
+
 #if UNITY_EDITOR
         private void OnValidate()
         {
             if (_agent == null) TryGetComponent (out _agent);
+
+            if (_characterAnimation == null) TryGetComponent(out _characterAnimation);
         }
 #endif
     }
