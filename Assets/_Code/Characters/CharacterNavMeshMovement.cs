@@ -41,7 +41,7 @@ namespace Characters
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                StartMovement(new Vector3(10, 0, 10), new NavmeshMovementData(() =>
+                StartMovement(new Vector3(10, 0, 10), new NavmeshMovementData(2, () =>
                 { Debug.Log("o!");}
                 ));
             }
@@ -67,6 +67,7 @@ namespace Characters
         {
             _targetRotation = movementData.RotationInReachedPoint;
             _onReachPointAction = movementData.OnReachedPointEvent;
+            _agent.stoppingDistance = movementData.StopDistance;
         }
 
         private void CheckIsPointReached()
