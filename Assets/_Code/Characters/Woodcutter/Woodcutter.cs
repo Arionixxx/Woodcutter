@@ -11,13 +11,18 @@ namespace Characters.Woodcutter
         private WoodcutterTimer _woodcutterTimer;
 
         [SerializeField]
+        private WoodcutterCuttingDown _woodcutterCuttingDown;
+
+        [SerializeField]
+        private WoodcutterAnimation _characterAnimation;
+
+        [SerializeField]
+        private CharacterAnimationEvents _characterAnimationEvents;
+
+        [SerializeField]
         private CharacterNavMeshMovement _characterNavMeshMovement;
 
-        private readonly float _stopDistanceForSlashing = 2f;
-
-        private Tree _currentTree;
-
-        private bool _isCuttingTreeNow;
+        private readonly float _stopDistanceForSlashing = 1.5f;
 
         private void Start()
         {
@@ -28,22 +33,29 @@ namespace Characters.Woodcutter
         private void SubscribeOnEvents()
         {
             _woodcutterTimer.OnTheTimerExpires += TryToFindTheNearestTree;
+            _characterAnimationEvents.OnAxeSlashEnded += _characterAnimation.BreakAxeSlash;
         }
 
         private void TryToFindTheNearestTree()
         {
-            _currentTree = TreesCollector.FindTheNearestTree(transform.position);
+            Tree tree = TreesCollector.FindTheNearestTree(transform.position);
 
-            if (_currentTree != null)
+            if (tree != null)
             {
-                _characterNavMeshMovement.StartMovement(_currentTree.transform.position,
+                _characterNavMeshMovement.StartMovement(tree.transform.position,
                     new NavmeshMovementData(_stopDistanceForSlashing, StartCutDownTheTree));
+
+                _woodcutterCuttingDown.SetupCurrentTree(tree);
+            }
+            else
+            {
+                //go to the house and wait for new trees
             }
         }
 
         private void StartCutDownTheTree()
         {
-            Debug.Log("Start the cutting down");
+            _woodcutterCuttingDown.StartNewCuttingDown();
         }
 
 #if UNITY_EDITOR
@@ -52,6 +64,12 @@ namespace Characters.Woodcutter
             if (_woodcutterTimer == null) TryGetComponent(out _woodcutterTimer);
 
             if (_characterNavMeshMovement == null) TryGetComponent(out _characterNavMeshMovement);
+
+            if (_characterAnimation == null) TryGetComponent(out _characterAnimation);
+
+            if (_woodcutterCuttingDown == null) TryGetComponent(out _woodcutterCuttingDown);
+
+            if (_characterAnimationEvents == null) _characterAnimationEvents = GetComponentInChildren<CharacterAnimationEvents>();
         }
 #endif
     }

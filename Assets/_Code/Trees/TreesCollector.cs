@@ -35,6 +35,12 @@ namespace Trees
 
             return nearestTree;
         }
+
+        public static void RemoveTree(Tree tree)
+        {
+            _treesStatic.Remove(tree);
+        }
+
         private void FillTreesList()
         {
             _trees.Clear();

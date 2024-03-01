@@ -17,7 +17,7 @@ namespace Trees
         private GameObject _choosedVisual;
 
         private readonly float _randomRange = 5f;
-        private readonly float _treeFallDelay = 3f;
+        private readonly float _treeFallDelay = 5f;
         private float _timer;
 
         private void Start()

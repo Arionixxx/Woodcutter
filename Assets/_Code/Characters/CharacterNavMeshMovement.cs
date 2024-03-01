@@ -14,7 +14,7 @@ namespace Characters
         [SerializeField]
         private CharacterAnimation _characterAnimation;
 
-        private readonly float _reachPointOffset = 1f;
+        private readonly float _reachPointOffset = 0.1f;
 
         private float _maxMoveSpeed = 4f;
         private float _rotationSpeed = 10f;
@@ -62,7 +62,9 @@ namespace Characters
 
         private void CheckIsPointReached()
         {
-            if ((transform.position - _targetPosition).sqrMagnitude < _reachPointOffset)
+            float distance = _reachPointOffset + _agent.stoppingDistance;
+            distance *= distance;
+            if ((transform.position - _targetPosition).sqrMagnitude < distance)
             {
                 StopMovement();
                 _onReachPointAction?.Invoke();

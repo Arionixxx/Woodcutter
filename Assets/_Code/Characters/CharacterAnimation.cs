@@ -5,7 +5,7 @@ namespace Characters
     public class CharacterAnimation : MonoBehaviour
     {
         [SerializeField]
-        private Animator _animator;
+        protected Animator _animator;
 
         private readonly float _moveSpeedForFullRunAnimation = 8f;
 
@@ -13,7 +13,7 @@ namespace Characters
         private int _movingBlendHash;
         private int _moveSpeedMultiplierHash;
 
-        private void Awake()
+        protected virtual void Awake()
         {
             Initialize();
         }
