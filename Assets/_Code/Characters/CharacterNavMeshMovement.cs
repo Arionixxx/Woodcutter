@@ -14,7 +14,7 @@ namespace Characters
         [SerializeField]
         private CharacterAnimation _characterAnimation;
 
-        private readonly float _reachPointOffset = 0.01f;
+        private readonly float _reachPointOffset = 1f;
 
         private float _maxMoveSpeed = 4f;
         private float _rotationSpeed = 10f;
@@ -35,16 +35,6 @@ namespace Characters
         {
             NavmeshMovementUpdate();
             CheckIsPointReached();
-        }
-
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                StartMovement(new Vector3(10, 0, 10), new NavmeshMovementData(2, () =>
-                { Debug.Log("o!");}
-                ));
-            }
         }
 
         public void StartMovement(Vector3 position, NavmeshMovementData movementData)
