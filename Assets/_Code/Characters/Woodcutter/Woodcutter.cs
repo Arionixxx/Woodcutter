@@ -32,6 +32,7 @@ namespace Characters.Woodcutter
 
         private void SubscribeOnEvents()
         {
+            TreesSpawner.OnTreesSpawn += TryToFindTheNearestTree;
             _woodcutterTimer.OnTheTimerExpires += TryToFindTheNearestTree;
             _characterAnimationEvents.OnAxeSlashEnded += _characterAnimation.BreakAxeSlash;
         }

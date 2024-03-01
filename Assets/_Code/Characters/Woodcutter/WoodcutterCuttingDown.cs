@@ -21,7 +21,7 @@ namespace Characters.Woodcutter
 
         private Tree _currentTree;
 
-        private readonly float _delayBetweenSlashes = 0.5f;
+        private readonly float _delayBetweenSlashes = 0.3f;
         private readonly int _slashesBeforeTreWillBeCuttedDown = 3;
 
         private int _currentSlashCount = 0;
@@ -31,7 +31,7 @@ namespace Characters.Woodcutter
         private void Start()
         {
             SubscribeOnEvents();
-            _axe.SetActive(false);
+            HideAxe();
         }
 
         public void OnSystemUpdate(float deltaTime)
@@ -47,9 +47,10 @@ namespace Characters.Woodcutter
 
         public void StartNewCuttingDown()
         {
-            _axe.SetActive(true);
-            _woodcutterAnimation.AxeSlash();
             _isCuttingDown = true;
+            _characterAnimationEvents.OnAxeSlashEnded -= HideAxe;
+            ShowAxe();
+            _woodcutterAnimation.AxeSlash();
         }
 
         private void StopCuttingDown()
@@ -79,7 +80,8 @@ namespace Characters.Woodcutter
                 StopCuttingDown();
                 _currentSlashCount = 0;
                 _currentTree.CutDown();
-                _woodcutterTimer.StartNewTimer();
+                _woodcutterTimer.StartNewTimer();//timer before movement to new tree
+                _characterAnimationEvents.OnAxeSlashEnded += HideAxe;
             }
         }
 
@@ -93,6 +95,17 @@ namespace Characters.Woodcutter
                 this.StopUpdate();
             }
         }
+
+        private void HideAxe()
+        {
+            _axe.SetActive(false);
+        }
+
+        private void ShowAxe()
+        {
+            _axe.SetActive(true);
+        }
+
 
 #if UNITY_EDITOR
         private void OnValidate()

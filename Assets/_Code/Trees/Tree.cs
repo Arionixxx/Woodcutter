@@ -16,22 +16,21 @@ namespace Trees
 
         private GameObject _choosedVisual;
 
-        private readonly float _randomRange = 5f;
+        private readonly float _randomRange = 15f;
         private readonly float _treeFallDelay = 5f;
         private float _timer;
-
-        private void Start()
-        {
-            Spawn();
-        }
 
         public void OnSystemUpdate(float deltaTime)
         {
             TimerUpdate(deltaTime);
         }
 
-        public void Spawn()
+        public void Spawn(Vector3 spawnPos)
         {
+            TreesCollector.AddTree(this);
+
+            transform.position = spawnPos;
+            transform.rotation = Quaternion.Euler(Vector3.zero);
             _collider.enabled = true;
             _rb.isKinematic = true;
 
@@ -55,7 +54,8 @@ namespace Trees
                 v[i] = Random.Range(-_randomRange, _randomRange);
             }
 
-            _rb.AddForce(v[0], v[1], v[2]);
+            Vector3 forceVector = new Vector3(v[0], v[1], v[2]);
+            _rb.AddForce(forceVector);
 
             _timer = _treeFallDelay;
             this.StartUpdate();
@@ -65,6 +65,7 @@ namespace Trees
         {
             _choosedVisual.SetActive(false);
             _collider.enabled = false;
+            _rb.isKinematic = true;
 
             //convert to 3 parts
         }

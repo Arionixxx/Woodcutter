@@ -7,7 +7,7 @@ namespace Characters.Woodcutter
     public class WoodcutterTimer : MonoBehaviour, IUpdatable
     {
         //this class calculate delay between trees cutting down
-        private readonly float _delay = 5f;
+        private readonly float _delayBetweenTreesCutting = 2.5f;
         private float _timer;
 
         public event Action OnTheTimerExpires;
@@ -19,7 +19,7 @@ namespace Characters.Woodcutter
 
         public void StartNewTimer()
         {
-            _timer = _delay;
+            _timer = _delayBetweenTreesCutting;
             this.StartUpdate();
         }
 

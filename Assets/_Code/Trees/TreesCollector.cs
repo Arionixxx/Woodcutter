@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,17 +5,9 @@ namespace Trees
 {
     public class TreesCollector : MonoBehaviour
     {
-        [SerializeField]
-        private List<Tree> _trees = new List<Tree>();
-
-        private static List<Tree> _treesStatic = new List<Tree>();
+        private static HashSet<Tree> _treesStatic = new HashSet<Tree>();
 
         private static readonly float _tempMinDistanceForTheNearestTree = 10000f;
-
-        private void Awake()
-        {
-            _treesStatic = _trees;
-        }
 
         public static Tree FindTheNearestTree(Vector3 position)
         {
@@ -36,28 +27,20 @@ namespace Trees
             return nearestTree;
         }
 
-        public static void RemoveTree(Tree tree)
+        public static void AddTree(Tree tree)
         {
-            _treesStatic.Remove(tree);
-        }
-
-        private void FillTreesList()
-        {
-            _trees.Clear();
-            Tree[] treesArr = GetComponentsInChildren<Tree>();
-
-            foreach (Tree tree in treesArr)
+            if (!_treesStatic.Contains(tree))
             {
-                _trees.Add(tree);
+                _treesStatic.Add(tree);
             }
         }
 
-
-#if UNITY_EDITOR
-        private void OnValidate()
+        public static void RemoveTree(Tree tree)
         {
-            FillTreesList();
+            if (_treesStatic.Contains(tree))
+            {
+                _treesStatic.Remove(tree);
+            }
         }
-#endif
     }
 }
