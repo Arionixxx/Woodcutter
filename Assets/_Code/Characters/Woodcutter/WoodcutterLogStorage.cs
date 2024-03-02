@@ -56,6 +56,7 @@ namespace Characters.Woodcutter
                 }
                 else
                 {
+                    _logs[i].SwitchKinematic(false);
                     _logs.RemoveAt(i);
                 }
             }

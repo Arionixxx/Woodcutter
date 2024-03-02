@@ -22,7 +22,7 @@ namespace Trees
         private GameObject _choosedVisual;
 
         private readonly float _randomRange = 15f;
-        private readonly float _treeFallDelay = 5f;
+        private readonly float _treeFallDelay = 3.5f;
         private float _timer;
 
         public event Action OnLogsSpawn;

@@ -1,5 +1,6 @@
 using Data;
 using FixedPoints;
+using System;
 using Trees;
 using UnityEngine;
 using Tree = Trees.Tree;
@@ -27,6 +28,8 @@ namespace Characters.Woodcutter
         private CharacterNavMeshMovement _characterNavMeshMovement;
 
         private readonly float _stopDistanceForSlashing = 1.5f;
+
+        public static event Action OnTheNearestTreeNotFound;
 
         private void Start()
         {
@@ -61,7 +64,7 @@ namespace Characters.Woodcutter
             }
             else
             {
-                //go to the house and wait for new trees
+                OnTheNearestTreeNotFound?.Invoke();
             }
         }
 

@@ -17,9 +17,9 @@ namespace Trees
             _rb.isKinematic = false;
         }
 
-        public void MakeKinematic()
+        public void SwitchKinematic(bool value)
         {
-            _rb.isKinematic = true;
+            _rb.isKinematic = value;
         }
 
 

@@ -1,6 +1,9 @@
+using Characters.Woodcutter;
 using System;
 using System.Collections.Generic;
+using UI;
 using UnityEngine;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 namespace Trees
@@ -25,14 +28,7 @@ namespace Trees
         {
             InstantiateTrees();
             SpawnTreesFromPool();
-        }
-
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                SpawnTreesFromPool();
-            }
+            SubscribeOnEvents();
         }
 
         public static void AddSpawnPoint(TreeSpawnPoint treeSpawnPoint)
@@ -42,6 +38,11 @@ namespace Trees
                 _staticSpawnPoints.Add(treeSpawnPoint);
             }
             RecalculateSpawnPointsCount();
+        }
+
+        private void SubscribeOnEvents()
+        {
+            SpawnMoreTreesButton.OnSpawnButtonClick += SpawnTreesFromPool;
         }
 
         private static void RecalculateSpawnPointsCount()

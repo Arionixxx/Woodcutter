@@ -34,7 +34,7 @@ namespace Characters.Woodcutter
 
             foreach (SingleLog log in _flyingLogs)
             {
-                log.MakeKinematic();
+                log.SwitchKinematic(true);
             }
 
             this.StartUpdate();
