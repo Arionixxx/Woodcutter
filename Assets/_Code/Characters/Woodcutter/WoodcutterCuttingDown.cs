@@ -17,6 +17,9 @@ namespace Characters.Woodcutter
         private WoodcutterTimer _woodcutterTimer;
 
         [SerializeField]
+        private WoodcutterLogsCollecting _woodcutterLogsCollecting;
+
+        [SerializeField]
         private GameObject _axe;
 
         private Tree _currentTree;
@@ -41,6 +44,11 @@ namespace Characters.Woodcutter
 
         public void SetupCurrentTree(Tree tree)
         {
+            if (_currentTree != null)
+            {
+                _currentTree.OnLogsSpawn -= _woodcutterLogsCollecting.StartLogsCollecting;
+            }
+
             _currentTree = tree;
         }
 
@@ -79,6 +87,7 @@ namespace Characters.Woodcutter
                 StopCuttingDown();
                 _currentSlashCount = 0;
                 _currentTree.CutDown();
+                _currentTree.OnLogsSpawn += _woodcutterLogsCollecting.StartLogsCollecting;
                // _woodcutterTimer.StartNewTimer();//timer before movement to new tree
                 _characterAnimationEvents.OnAxeSlashEnded += HideAxe;
             }
@@ -114,6 +123,8 @@ namespace Characters.Woodcutter
             if (_woodcutterAnimation == null) TryGetComponent(out _woodcutterAnimation);
 
             if (_woodcutterTimer == null) TryGetComponent(out _woodcutterTimer);
+
+            if (_woodcutterLogsCollecting == null) TryGetComponent(out _woodcutterLogsCollecting);
         }
 #endif
     }

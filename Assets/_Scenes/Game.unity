@@ -636,6 +636,37 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &593048391
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 593048392}
+  m_Layer: 6
+  m_Name: LogsCollectingPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &593048392
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 593048391}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0, y: -0, z: -0.329}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 366175169871782870}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -1123,6 +1154,7 @@ GameObject:
   - component: {fileID: 1991498932}
   - component: {fileID: 1991498926}
   - component: {fileID: 1991498933}
+  - component: {fileID: 1991498934}
   m_Layer: 6
   m_Name: Woodcutter
   m_TagString: Untagged
@@ -1239,7 +1271,22 @@ MonoBehaviour:
   _characterAnimationEvents: {fileID: 919132147815010026}
   _woodcutterAnimation: {fileID: 1991498932}
   _woodcutterTimer: {fileID: 1991498931}
+  _woodcutterLogsCollecting: {fileID: 0}
   _axe: {fileID: 3163274003622044573}
+--- !u!114 &1991498934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1991498924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b25bbed81315d56409ece445981c267f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _woodcutterAnimation: {fileID: 1991498932}
+  _finalPoint: {fileID: 593048392}
 --- !u!1 &2068865888
 GameObject:
   m_ObjectHideFlags: 0
@@ -1380,6 +1427,7 @@ Transform:
   - {fileID: 2420202490089927501}
   - {fileID: 6515712192248164267}
   - {fileID: 7078722786637236772}
+  - {fileID: 593048392}
   m_Father: {fileID: 1202371031257191357}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

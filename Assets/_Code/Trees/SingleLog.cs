@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Trees
@@ -18,6 +16,12 @@ namespace Trees
             transform.rotation = rotation;
             _rb.isKinematic = false;
         }
+
+        public void MakeKinematic()
+        {
+            _rb.isKinematic = true;
+        }
+
 
 #if UNITY_EDITOR
         private void OnValidate()

@@ -12,7 +12,10 @@ namespace Trees
 
         private static List<SingleLog> _logs = new List<SingleLog>();
 
+        public static List<SingleLog> Logs => _logs;
+
         private readonly int _logsCount = 3;
+
 
         private void Awake()
         {

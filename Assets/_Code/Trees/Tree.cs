@@ -1,5 +1,7 @@
+using System;
 using UnityEngine;
 using UpdateSys;
+using Random = UnityEngine.Random;
 
 namespace Trees
 {
@@ -22,6 +24,8 @@ namespace Trees
         private readonly float _randomRange = 15f;
         private readonly float _treeFallDelay = 5f;
         private float _timer;
+
+        public event Action OnLogsSpawn;
 
         public void OnSystemUpdate(float deltaTime)
         {
@@ -72,6 +76,7 @@ namespace Trees
 
             //convert to 3 parts
             LogsSpawner.SpawnLogs(_logsSpawnPoint.position, _logsSpawnPoint.rotation);
+            OnLogsSpawn?.Invoke();
         }
 
         private void TimerUpdate(float deltaTime)
