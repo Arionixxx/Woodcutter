@@ -1,4 +1,5 @@
 using Data;
+using FixedPoints;
 using Trees;
 using UnityEngine;
 using Tree = Trees.Tree;
@@ -8,13 +9,16 @@ namespace Characters.Woodcutter
     public class Woodcutter : CharacterBase
     {
         [SerializeField]
-        private WoodcutterTimer _woodcutterTimer;
-
-        [SerializeField]
         private WoodcutterCuttingDown _woodcutterCuttingDown;
 
         [SerializeField]
         private WoodcutterAnimation _characterAnimation;
+
+        [SerializeField]
+        private WoodcutterLogsCollecting _woodcutterLogsCollecting;
+
+        [SerializeField]
+        private WoodcutterLogStorage _woodcutterLogStorage;
 
         [SerializeField]
         private CharacterAnimationEvents _characterAnimationEvents;
@@ -33,8 +37,15 @@ namespace Characters.Woodcutter
         private void SubscribeOnEvents()
         {
             TreesSpawner.OnTreesSpawn += TryToFindTheNearestTree;
-            _woodcutterTimer.OnTheTimerExpires += TryToFindTheNearestTree;
+            _woodcutterLogStorage.OnLogStored += TryToFindTheNearestTree;
             _characterAnimationEvents.OnAxeSlashEnded += _characterAnimation.BreakAxeSlash;
+            _woodcutterLogsCollecting.OnLogsCollected += () =>
+            {
+                _characterNavMeshMovement.StartMovement(WoodDeliveryPoint.Position, new NavmeshMovementData(() => 
+                {
+                    _woodcutterLogStorage.Store();
+                }));
+            };
         }
 
         private void TryToFindTheNearestTree()
@@ -62,8 +73,6 @@ namespace Characters.Woodcutter
 #if UNITY_EDITOR
         private void OnValidate()
         {
-            if (_woodcutterTimer == null) TryGetComponent(out _woodcutterTimer);
-
             if (_characterNavMeshMovement == null) TryGetComponent(out _characterNavMeshMovement);
 
             if (_characterAnimation == null) TryGetComponent(out _characterAnimation);
@@ -71,6 +80,10 @@ namespace Characters.Woodcutter
             if (_woodcutterCuttingDown == null) TryGetComponent(out _woodcutterCuttingDown);
 
             if (_characterAnimationEvents == null) _characterAnimationEvents = GetComponentInChildren<CharacterAnimationEvents>();
+
+            if (_woodcutterLogsCollecting == null) TryGetComponent(out _woodcutterLogsCollecting);
+
+            if (_woodcutterLogStorage == null) TryGetComponent(out _woodcutterLogStorage);
         }
 #endif
     }

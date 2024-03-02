@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Trees;
 using UnityEngine;
@@ -18,6 +19,8 @@ namespace Characters.Woodcutter
         private readonly float _logSpeed = 2.5f;
         private readonly float _offset = 0.01f;
 
+        public event Action OnLogsCollected;
+
         public void OnSystemUpdate(float deltaTime)
         {
             CollectingUpdate();
@@ -25,7 +28,6 @@ namespace Characters.Woodcutter
 
         public void StartLogsCollecting()
         {
-            Debug.Log("start logs collecting");
             _woodcutterAnimation.SwitchMagicCollecting(true);
 
             _flyingLogs = new List<SingleLog>(LogsSpawner.Logs);
@@ -67,7 +69,7 @@ namespace Characters.Woodcutter
             {
                 this.StopUpdate();
                 _woodcutterAnimation.SwitchMagicCollecting(false);
-                //go home
+                OnLogsCollected?.Invoke();
             }
         }
 
