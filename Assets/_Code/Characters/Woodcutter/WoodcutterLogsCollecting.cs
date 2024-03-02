@@ -12,6 +12,9 @@ namespace Characters.Woodcutter
         private WoodcutterAnimation _woodcutterAnimation;
 
         [SerializeField]
+        private WoodcutterVFX _woodcutterVFX;
+
+        [SerializeField]
         private Transform _finalPoint;
 
         private List<SingleLog> _flyingLogs;
@@ -29,6 +32,7 @@ namespace Characters.Woodcutter
         public void StartLogsCollecting()
         {
             _woodcutterAnimation.SwitchMagicCollecting(true);
+            _woodcutterVFX.TurnOnHandsVFX();
 
             _flyingLogs = new List<SingleLog>(LogsSpawner.Logs);
 
@@ -69,6 +73,7 @@ namespace Characters.Woodcutter
             {
                 this.StopUpdate();
                 _woodcutterAnimation.SwitchMagicCollecting(false);
+                _woodcutterVFX.TurnOffHandsVFX();
                 OnLogsCollected?.Invoke();
             }
         }
@@ -77,6 +82,8 @@ namespace Characters.Woodcutter
         private void OnValidate()
         {
             if (_woodcutterAnimation == null) TryGetComponent(out _woodcutterAnimation);
+
+            if (_woodcutterVFX == null) TryGetComponent(out _woodcutterVFX);
         }
 #endif
     }

@@ -13,6 +13,9 @@ namespace Characters.Woodcutter
         [SerializeField]
         private WoodcutterAnimation _woodcutterAnimation;
 
+        [SerializeField]
+        private WoodcutterVFX _woodcutterVFX;
+
         private readonly float _offset = 0.01f;
         private readonly float _logSpeed = 2.5f;
 
@@ -40,6 +43,7 @@ namespace Characters.Woodcutter
                 log.transform.SetParent(null);
             }
 
+            _woodcutterVFX.TurnOnHandsVFX();
             _woodcutterAnimation.SwitchMagicCollecting(true);
             this.StartUpdate();
         }
@@ -62,6 +66,7 @@ namespace Characters.Woodcutter
             }
             if (_logs.Count == 0)
             {
+                _woodcutterVFX.TurnOffHandsVFX();
                 _woodcutterAnimation.SwitchMagicCollecting(false);
                 OnLogStored?.Invoke();
                 this.StopUpdate();
@@ -72,6 +77,8 @@ namespace Characters.Woodcutter
         private void OnValidate()
         {
             if (_woodcutterAnimation == null) TryGetComponent(out _woodcutterAnimation);
+
+            if (_woodcutterVFX == null) TryGetComponent(out _woodcutterVFX);
         }
 #endif
     }

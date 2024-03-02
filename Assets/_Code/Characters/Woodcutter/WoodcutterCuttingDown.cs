@@ -1,3 +1,4 @@
+using Collision;
 using Data;
 using Trees;
 using UnityEngine;
@@ -15,13 +16,10 @@ namespace Characters.Woodcutter
         private WoodcutterAnimation _woodcutterAnimation;
 
         [SerializeField]
-        private WoodcutterTimer _woodcutterTimer;
-
-        [SerializeField]
         private WoodcutterLogsCollecting _woodcutterLogsCollecting;
 
         [SerializeField]
-        private GameObject _axe;
+        private AxeCollision _axe;
 
         private Tree _currentTree;
 
@@ -70,6 +68,8 @@ namespace Characters.Woodcutter
 
         private void SubscribeOnEvents()
         {
+            _characterAnimationEvents.OnAxeColliderTurningOn += _axe.TurnOnCollision;
+            _characterAnimationEvents.OnAxeColliderTurningOff += _axe.TurnOffCollision;
             _characterAnimationEvents.OnAxeSlashMiddle += IncreaseSlashCount;
             _characterAnimationEvents.OnAxeSlashEnded += () =>
             {
@@ -107,12 +107,12 @@ namespace Characters.Woodcutter
 
         private void HideAxe()
         {
-            _axe.SetActive(false);
+            _axe.gameObject.SetActive(false);
         }
 
         private void ShowAxe()
         {
-            _axe.SetActive(true);
+            _axe.gameObject.SetActive(true);
         }
 
 
@@ -122,8 +122,6 @@ namespace Characters.Woodcutter
             if (_characterAnimationEvents == null) _characterAnimationEvents = GetComponentInChildren<CharacterAnimationEvents>();
 
             if (_woodcutterAnimation == null) TryGetComponent(out _woodcutterAnimation);
-
-            if (_woodcutterTimer == null) TryGetComponent(out _woodcutterTimer);
 
             if (_woodcutterLogsCollecting == null) TryGetComponent(out _woodcutterLogsCollecting);
         }

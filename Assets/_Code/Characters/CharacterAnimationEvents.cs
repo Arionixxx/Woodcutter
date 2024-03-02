@@ -7,6 +7,8 @@ namespace Characters
     {
         public event Action OnAxeSlashEnded;
         public event Action OnAxeSlashMiddle;
+        public event Action OnAxeColliderTurningOn;
+        public event Action OnAxeColliderTurningOff;
 
         private void AxeSlashEnd_AnimEvent()
         {
@@ -16,6 +18,16 @@ namespace Characters
         private void AxeSlashMiddle_AnimEvent()
         {
             OnAxeSlashMiddle?.Invoke();
+        }
+
+        private void TurnOnAxeCollider_AnimEvent()
+        {
+            OnAxeColliderTurningOn?.Invoke();
+        }
+
+        private void TurnOffAxeCollider_AnimEvent()
+        {
+            OnAxeColliderTurningOff?.Invoke();
         }
 
     }
