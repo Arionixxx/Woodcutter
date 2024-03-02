@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: TreeSettings
   m_EditorClassIdentifier: 
   _logsCount: 3
-  _treeFallDelay: 3.5
+  _treeFallDelay: 3
   _minSpawnCount: 1
   _maxSpawnCount: 5
