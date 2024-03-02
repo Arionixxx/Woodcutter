@@ -34,6 +34,7 @@ Transform:
   - {fileID: 2361208524851927957}
   - {fileID: 7026080674135990055}
   - {fileID: 2395591578796020850}
+  - {fileID: 3048169549994342904}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -81,10 +82,42 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _collider: {fileID: 6168011604596336198}
   _rb: {fileID: 6168011604596336197}
+  _logsSpawnPoint: {fileID: 3048169549994342904}
   _visualVariants:
   - {fileID: 3138835252854391087}
   - {fileID: 7695094344208647581}
   - {fileID: 3059361922731052744}
+--- !u!1 &7693398977997486511
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3048169549994342904}
+  m_Layer: 0
+  m_Name: LogsSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3048169549994342904
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7693398977997486511}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 2.38, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6168011604596336196}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &6168011602895037029
 PrefabInstance:
   m_ObjectHideFlags: 0

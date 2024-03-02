@@ -39,7 +39,6 @@ namespace Characters.Woodcutter
             TimerUpdate(deltaTime);
         }
 
-
         public void SetupCurrentTree(Tree tree)
         {
             _currentTree = tree;
@@ -80,7 +79,7 @@ namespace Characters.Woodcutter
                 StopCuttingDown();
                 _currentSlashCount = 0;
                 _currentTree.CutDown();
-                _woodcutterTimer.StartNewTimer();//timer before movement to new tree
+               // _woodcutterTimer.StartNewTimer();//timer before movement to new tree
                 _characterAnimationEvents.OnAxeSlashEnded += HideAxe;
             }
         }

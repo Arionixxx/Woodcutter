@@ -12,6 +12,9 @@ namespace Trees
         private Rigidbody _rb;
 
         [SerializeField]
+        private Transform _logsSpawnPoint;
+
+        [SerializeField]
         private GameObject[] _visualVariants;
 
         private GameObject _choosedVisual;
@@ -68,6 +71,7 @@ namespace Trees
             _rb.isKinematic = true;
 
             //convert to 3 parts
+            LogsSpawner.SpawnLogs(_logsSpawnPoint.position, _logsSpawnPoint.rotation);
         }
 
         private void TimerUpdate(float deltaTime)
