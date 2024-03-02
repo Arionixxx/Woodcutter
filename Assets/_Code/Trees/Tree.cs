@@ -12,6 +12,9 @@ namespace Trees
         private CapsuleCollider _collider;
 
         [SerializeField]
+        private TreeVFX _VFX;
+
+        [SerializeField]
         private Rigidbody _rb;
 
         [SerializeField]
@@ -82,6 +85,7 @@ namespace Trees
 
             //convert to 3 parts
             LogsSpawner.SpawnLogs(_logsSpawnPoint.position, _logsSpawnPoint.rotation);
+            _VFX.PlayPuffVFX();
             OnLogsSpawn?.Invoke();
         }
 
@@ -103,6 +107,8 @@ namespace Trees
             if (_collider == null) TryGetComponent(out _collider);
 
             if (_rb == null) TryGetComponent(out _rb);
+
+            if (_VFX == null) TryGetComponent(out _VFX);
         }
 #endif
     }

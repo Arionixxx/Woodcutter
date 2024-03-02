@@ -45,7 +45,7 @@ namespace Characters.Woodcutter
             _characterAnimationEvents.OnAxeSlashEnded += _characterAnimation.BreakAxeSlash;
             _woodcutterLogsCollecting.OnLogsCollected += () =>
             {
-                _characterNavMeshMovement.StartMovement(WoodDeliveryPoint.Position, new NavmeshMovementData(() => 
+                _characterNavMeshMovement.StartMovement(WoodDeliveryPoint.Position, new NavmeshMovementData(WoodDeliveryPoint.Rotation.eulerAngles, () => 
                 {
                     _woodcutterLogStorage.Store();
                 }));

@@ -26,7 +26,7 @@ namespace Collision
         {
             if (other.TryGetComponent<Tree>(out Tree tree))
             {
-                _axeVFX.PlayAxeHitTreeVFX();
+                _axeVFX.PlayAxeHitTreeVFX(tree.transform.position);
                 TurnOffCollision();
             }
         }

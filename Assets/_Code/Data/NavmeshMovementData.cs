@@ -15,6 +15,8 @@ namespace Data
 
         public NavmeshMovementData(Vector3 rotationInReachedPoint) : this(0, rotationInReachedPoint, null) { }
 
+        public NavmeshMovementData(Vector3 rotationInReachedPoint, Action onReachedPointEvent) : this (0, rotationInReachedPoint, onReachedPointEvent) { }
+
         public NavmeshMovementData(float stopDistance, Action onReachedPointEvent) : this(stopDistance, Vector3.zero, onReachedPointEvent) { }
 
         public NavmeshMovementData(float stopDistance, Vector3 rotationInReachedPoint, Action onReachedPointEvent)

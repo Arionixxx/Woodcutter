@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace VFX
@@ -19,9 +17,10 @@ namespace VFX
             _axeHitTree = Instantiate(_axeHitTreePrefab);
         }
 
-        public void PlayAxeHitTreeVFX()
+        public void PlayAxeHitTreeVFX(Vector3 hitObjectPos)
         {
-            _axeHitTree.transform.position = _pointForVFX.position;
+            _axeHitTree.transform.position = new Vector3(hitObjectPos.x,
+                _pointForVFX.position.y, hitObjectPos.z);
             _axeHitTree.Play();
         }
     }

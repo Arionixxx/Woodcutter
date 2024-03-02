@@ -6,6 +6,7 @@ namespace FixedPoints
     {
         private static Transform _transform;
         public static Vector3 Position => _transform.position;
+        public static Quaternion Rotation => _transform.rotation;
 
         private void Awake()
         {
