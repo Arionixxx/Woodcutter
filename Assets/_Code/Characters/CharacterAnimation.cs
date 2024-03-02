@@ -1,3 +1,4 @@
+using Data;
 using UnityEngine;
 
 namespace Characters
@@ -7,7 +8,7 @@ namespace Characters
         [SerializeField]
         protected Animator _animator;
 
-        private readonly float _moveSpeedForFullRunAnimation = 8f;
+        private float _moveSpeedForFullRunAnimation;
 
         private int _isMovingHash;
         private int _movingBlendHash;
@@ -16,6 +17,11 @@ namespace Characters
         protected virtual void Awake()
         {
             Initialize();
+        }
+
+        private void Start()
+        {
+            _moveSpeedForFullRunAnimation = DataProvider.PlayerSettings.MoveSpeedForFullRunAnimation;
         }
 
         public void ChangeMovingSpeed(float currentMovementSpeed, float maxMovementSpeed)

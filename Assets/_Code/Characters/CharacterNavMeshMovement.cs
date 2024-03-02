@@ -17,7 +17,7 @@ namespace Characters
         private readonly float _reachPointOffset = 0.1f;
 
         private float _maxMoveSpeed = 4f;
-        private float _rotationSpeed = 180f;//add to scriptable object
+        private float _rotationSpeed = 180f;
 
         private Vector3 _targetPosition;
 
@@ -97,7 +97,10 @@ namespace Characters
 
         private void InitializeSpeedAndRotation()
         {
-            _agent.speed = _maxMoveSpeed;//_moveSpeed = _settings.NavmeshMoveSpeed;
+            _maxMoveSpeed = DataProvider.PlayerSettings.MaxMoveSpeed;
+            _rotationSpeed = DataProvider.PlayerSettings.RotationSpeed;
+
+            _agent.speed = _maxMoveSpeed;
             _agent.angularSpeed = _rotationSpeed;
         }
 

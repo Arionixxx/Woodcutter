@@ -1,3 +1,4 @@
+using Data;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -14,11 +15,11 @@ namespace Trees
 
         public static List<SingleLog> Logs => _logs;
 
-        private readonly int _logsCount = 3;
+        private int _logsCount;
 
-
-        private void Awake()
+        private void Start()
         {
+            _logsCount = DataProvider.TreeSettings.LogsCount;
             InstantiateLogs();
         }
 

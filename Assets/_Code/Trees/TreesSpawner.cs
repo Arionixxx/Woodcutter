@@ -1,4 +1,5 @@
 using Characters.Woodcutter;
+using Data;
 using System;
 using System.Collections.Generic;
 using UI;
@@ -17,8 +18,8 @@ namespace Trees
 
         private static List<TreeSpawnPoint> _staticSpawnPoints = new List<TreeSpawnPoint>();
 
-        private int _minSpawnCount = 1;
-        private int _maxSpawnCount = 5;//take from script obj
+        private int _minSpawnCount;
+        private int _maxSpawnCount;
 
         private static int _spawnPointsCount;
 
@@ -26,6 +27,9 @@ namespace Trees
 
         private void Start()
         {
+            _minSpawnCount = DataProvider.TreeSettings.MinSpawnCount;
+            _maxSpawnCount = DataProvider.TreeSettings.MaxSpawnCount;
+
             InstantiateTrees();
             SpawnTreesFromPool();
             SubscribeOnEvents();

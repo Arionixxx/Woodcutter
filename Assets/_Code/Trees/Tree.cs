@@ -1,3 +1,4 @@
+using Data;
 using System;
 using UnityEngine;
 using UpdateSys;
@@ -22,10 +23,15 @@ namespace Trees
         private GameObject _choosedVisual;
 
         private readonly float _randomRange = 15f;
-        private readonly float _treeFallDelay = 3.5f;
+        private float _treeFallDelay;
         private float _timer;
 
         public event Action OnLogsSpawn;
+
+        private void Start()
+        {
+            _treeFallDelay = DataProvider.TreeSettings.TreeFallDelay;
+        }
 
         public void OnSystemUpdate(float deltaTime)
         {

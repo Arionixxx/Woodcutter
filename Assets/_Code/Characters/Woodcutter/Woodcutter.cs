@@ -27,12 +27,13 @@ namespace Characters.Woodcutter
         [SerializeField]
         private CharacterNavMeshMovement _characterNavMeshMovement;
 
-        private readonly float _stopDistanceForSlashing = 1.5f;
+        private float _stopDistanceForSlashing;
 
         public static event Action OnTheNearestTreeNotFound;
 
         private void Start()
         {
+            _stopDistanceForSlashing = DataProvider.PlayerSettings.StopDistanceForSlashing;
             SubscribeOnEvents();
             TryToFindTheNearestTree();
         }

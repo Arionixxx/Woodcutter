@@ -1,3 +1,4 @@
+using Data;
 using Trees;
 using UnityEngine;
 using UpdateSys;
@@ -24,15 +25,16 @@ namespace Characters.Woodcutter
 
         private Tree _currentTree;
 
-        private readonly float _delayBetweenSlashes = 0.3f;
-        private readonly int _slashesBeforeTreWillBeCuttedDown = 3;
-
+        private int _slashesBeforeTreeWillBeCuttedDown;
         private int _currentSlashCount = 0;
+        private float _delayBetweenSlashes;
         private float _timer;
         private bool _isCuttingDown;
 
         private void Start()
         {
+            _delayBetweenSlashes = DataProvider.PlayerSettings.DelayBetweenSlashes;
+            _slashesBeforeTreeWillBeCuttedDown = DataProvider.PlayerSettings.SlashesBeforeTreeWillBeCutterDown;
             SubscribeOnEvents();
             HideAxe();
         }
@@ -82,13 +84,12 @@ namespace Characters.Woodcutter
         private void IncreaseSlashCount()
         {
             _currentSlashCount++;
-            if (_currentSlashCount >= _slashesBeforeTreWillBeCuttedDown)
+            if (_currentSlashCount >= _slashesBeforeTreeWillBeCuttedDown)
             {
                 StopCuttingDown();
                 _currentSlashCount = 0;
                 _currentTree.CutDown();
                 _currentTree.OnLogsSpawn += _woodcutterLogsCollecting.StartLogsCollecting;
-               // _woodcutterTimer.StartNewTimer();//timer before movement to new tree
                 _characterAnimationEvents.OnAxeSlashEnded += HideAxe;
             }
         }
