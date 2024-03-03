@@ -7,11 +7,9 @@ namespace Trees
     {
         private static HashSet<Tree> _treesStatic = new HashSet<Tree>();
 
-        private static readonly float _tempMinDistanceForTheNearestTree = 10000f;
-
         public static Tree FindTheNearestTree(Vector3 position)
         {
-            float minDist = _tempMinDistanceForTheNearestTree;
+            float minDist = float.MaxValue;
             Tree nearestTree = null;
 
             foreach (Tree tree in _treesStatic)

@@ -57,7 +57,7 @@ namespace Characters.Woodcutter
             _isCuttingDown = true;
             _characterAnimationEvents.OnAxeSlashEnded -= HideAxe;
             ShowAxe();
-            _woodcutterAnimation.AxeSlash();
+            _woodcutterAnimation.AxeChop();
         }
 
         private void StopCuttingDown()
@@ -100,7 +100,7 @@ namespace Characters.Woodcutter
 
             if (_timer <= 0)
             {
-                _woodcutterAnimation.AxeSlash();
+                _woodcutterAnimation.AxeChop();
                 this.StopUpdate();
             }
         }

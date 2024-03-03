@@ -13,7 +13,7 @@ namespace Characters.Woodcutter {
             Initialize();
         }
 
-        public void AxeSlash()
+        public void AxeChop()
         {
             _animator.SetTrigger(_cuttingHash);
         }
