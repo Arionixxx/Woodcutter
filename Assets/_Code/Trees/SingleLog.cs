@@ -14,7 +14,7 @@ namespace Trees
             gameObject.SetActive(true);
             transform.position = new Vector3(position.x, position.y + _yOffset, position.z);
             transform.rotation = rotation;
-            _rb.isKinematic = false;
+            SwitchKinematic(false);
         }
 
         public void SwitchKinematic(bool value)
